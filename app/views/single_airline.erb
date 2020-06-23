@@ -1,0 +1,10 @@
+<h1><%=@airline.name%> Flight</h1>
+    <% @airline.tickets.each do |ticket| %>
+        <h4>Seat <%= ticket.seat_number %></h4>
+        <p>Departs from <%= ticket.departure_city %></p>
+        <p>Arrives at <%= ticket.destination_city %></p>
+    <% end %>
+<form method="post" action="/single_airline/<%=@airline.id %>" >
+    <input type="hidden" name="_method" value="delete">
+        <input type="submit" value= "Delete Airline">
+</form>

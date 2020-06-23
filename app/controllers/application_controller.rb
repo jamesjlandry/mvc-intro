@@ -1,11 +1,16 @@
 class ApplicationController < Sinatra::Base
-
-    set(:views, 'app/views')
-    
-
-end
-
-
-### HTTP Method  + URL  -> Address/Function Name
-### Headers -> Postage
-### Body -> Contents
+    set :method_override, true
+        set(:views, 'app/views')
+        get('/list_airlines') do
+            @airlines = Airline.all
+            erb(:list_airlines)
+        end
+        get('/single_airline/:id') do
+            @airline = Airline.find(params[:id])
+            erb(:single_airline)
+        end
+        delete('/single_airline/:id') do
+            @airline = Airline.find(params[:id])
+            @airline.destroy()
+        end
+    end
